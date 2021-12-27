@@ -1,0 +1,82 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="m-4">Welcome To {{request.user.full_name}}</h2>
+<div class="container">
+    <div class="row my-4">
+        <div class="card">
+          <div class="card-header">
+            Author
+          </div>
+          <div class="card-body">
+            <table class="table  table-borderless">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Join Date</th>
+                  <th scope="col">Paper Upload(Total)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">{{request.user.full_name}}</th>
+                  <td>{{request.user.created_on|date:"d M Y"}}</td>
+                  <td>{{obj1.total_paper}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+           
+          </div>
+        </div>
+    </div>
+    <div class="row my-4">
+       
+        <div class="card">
+          <div class="card-header">
+            Paper Details
+          </div>
+
+          <div class="card-body">
+            <table class="table  table-borderless">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">title</th>
+                  <th scope="col">Upload Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">View_file</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in obj %}
+                <tr>
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.title}}</td>
+                  <td>{{obj.created_on}}</td>
+                  <td>{{obj.status}}</td>
+                  <td><a href="{{obj.file.url}}"  target="_blank_" class="btn btn-info">View</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {%if messages %}
+            {% for message in messages %}
+        <div class="alert alert-danger" role='alert'>
+                {{message}}
+        </div>
+            {% endfor %}
+        {% endif %}
+            
+          </div>
+        </div>
+        
+    </div>
+</div>
+<div style="height:10vh;">
+    </div>
+
+
+{% endblock %}
+

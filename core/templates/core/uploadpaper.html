@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5 "  >
+      
+        <div class="row">
+        
+            <h2 >Upload Paper</h2>
+            <hr>
+            {% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif%}
+            <form  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="mb-3 col-6 my-2">
+                      <label for="inputType">Title</label>
+                      <input type="text" id="inputType" name="title" class="form-control {% if form.title.errors %}is-invalid{% endif %} " >
+                      <div class="invalid-feedback">
+                                       {{ form.title.errors}}
+                                    </div>
+
+                </div>
+                <div class="mb-3 col-6 my-2">
+                      <label for="inputType">Description</label>
+                      <!-- {{ form.description }} -->
+                      <input type="textarea" name="description"  class="form-control {% if form.description.errors %}is-invalid{% endif %}" >
+                      <div class="invalid-feedback">
+                                       {{ form.description.errors}}
+                                    </div>
+
+                </div>
+              
+                <div class="mb-3 col-6">
+                      <!-- <label for="inputType">Status</label> -->
+                      <input type="hidden" name="status" value="Pending" class="form-control">
+
+                </div>
+                <div class="mb-3 col-6 my-5">
+                      <label for="inputFile">File</label>
+                      <input type="file" id="inputFile" name="file" class="form-control {% if form.file.errors %}is-invalid{% endif %}" >
+
+                </div>
+                 
+                <div class="mb-3 col-6 py-3">
+                    <button type="submit" class="btn btn-outline-success">Submit</button>
+                </div>
+            </form>
+            </div>
+        </div>
+
+{% endblock %}
