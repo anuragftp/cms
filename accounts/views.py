@@ -111,16 +111,14 @@ class ProfileView(View):
 	def get(self,request,*args,**kwargs):
 		username=kwargs.get('username')
 		try:
-			user=User.objects.get(username=username)
+			user=User.objects.get(full_name=username)
 		except Exception as e:
 			return HttpResponse('<h1>This page is not exist </h1>')
 
-		if username == request.user.username:
-			if DonorRegistration.objects.filter(user=request.user).exists():
-				donor_list=DonorRegistration.objects.filter(user=request.user)
-				context={'user':user,'donor_list':donor_list}
-				return render(request,self.template_name,context)
-			return render(request,self.template_name)
+		if username == request.user.full_name:
+			context={'user':user}
+			return render(request,self.template_name,context)
+		
 		else:
 			return HttpResponse('<h1>This page is not exist </h1>')
 
@@ -132,7 +130,7 @@ class ProfileEditView(View):
 	form_class=UserEditForm
 	def get(self,request,*args,**kwargs):
 		username=kwargs.get('username')
-		if username != request.user.username:
+		if username != request.user.full_name:
 			return HttpResponse('<h1>This page is not exist </h1>')
 		form=self.form_class(instance=request.user)
 		context={'form':form}
@@ -145,7 +143,7 @@ class ProfileEditView(View):
 		if form.is_valid():
 			form.save()
 			messages.success(request,'Saved !')
-			return redirect('profile_view',request.user.username)
+			return redirect('profile_view',request.user.full_name)
 
 		else:
 			for field in form.errors:

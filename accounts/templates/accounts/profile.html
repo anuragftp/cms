@@ -1,4 +1,4 @@
-{% extends 'core/base.html' %}
+{% extends 'core/baseProfile.html' %}
 {% load static %}
  {% block content %}
  <div class="container mb-4 col-sm-8 my-5 ">
@@ -19,7 +19,7 @@
                         <i class="bi bi-gear-fill float-end mx-auto my-3 dropdown-toggle " id="dropdownMenuButton1" data-bs-toggle="dropdown"></i>
                          
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="{% url 'profile_edit_view'  request.user.username %}">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profile_edit_view'  request.user.full_name %}">Edit Profile</a></li>
                             <li><a class="dropdown-item" href="{% url 'password_change_view' %}">Change Password</a></li>
                             
                           </ul>
@@ -40,64 +40,31 @@
                   
                </div>
                <div class="form-group col-md-12">
-                   <label for="name" style="margin-right: 76px;">Username  </label><span>: {{request.user.username}}</span>
+                   <label for="name" style="margin-right: 76px;">Username  </label><span>: {{request.user.full_name}}</span>
                   
                </div>
                <div class="form-group col-md-12">
-                   <label for="name" style="margin-right: 123px;">Bio  </label><span>: {{request.user.bio}}</span>
+                   <label for="name" style="margin-right: 125px;">Bio  </label><span>: {{request.user.bio}}</span>
                   
                </div>
                <!-- <div class="form-group col-md-12">
                    <label for="name" style="margin-right: 88px;">Donor Id  </label><span>: {{request.user.get_donorid}}</span>
                   
                </div> -->
-               {% for obj in donor_list %}
-                <div class="form-group col-md-12">
-                   <label for="name" style="margin-right: 88px;">Donar Id  </label><span>: {{obj.id}} </span>
-                   
-               </div>
-               <div class="form-group col-md-12">
-                   <label for="name" style="margin-right: 107px;">Name   </label><span>: {{request.user.full_name}}</span>
-                   
-               </div>
                
-                 
-               <div class="form-group col-md-12">
-                   <label for="name"  style="margin-right: 57px;">Father Name   </label><span>: {{obj.fatherName}}</span>
-                  
-               </div>
-               <div class="form-group col-md-12">
-                   <label for="name" class="me-5">Mother Name  </label><span>: {{obj.motherName}}</span>
-                   
-               </div>
-               <div class="form-group col-md-12">
-                  <label for="date" style="margin-right: 57px;">Date of birth  </label><span>: {{obj.dob}}</span>
-               </div>
-               <div class="form-group col-md-12">
-                   <label for="name" style="margin-right: 70px;">Mobile No   </label><span>: {{obj.mobileNo}}</span>
-               </div>
-               <div class="form-group col-md-12">
-                <label for="inputGender" style="margin-right: 91px;">Gender  </label><span>: {{obj.gender}}</span>
-              </div> 
-               
-   
               <div class="form-group col-md-12">
-                <label for="Blood Group" style="margin-right: 53px;">Blood Group  </label><span>: {{obj.bloodGroup}}</span>
+                <label for="inputState" style="margin-right: 99px;">Mobile  </label><span>: {{request.user.mobile}}</span>
               </div>
-           
-  
               <div class="form-group col-md-12">
-                <label for="inputState" style="margin-right: 106px;">State  </label><span>: {{obj.state}}</span>
+              <label for="inputAddress" style="margin-right: 92px;">Address  </label><span>: {{request.user.address}}</span>             
               </div>
     
               <div class="form-group col-md-12">
-                <label for="inputCity" style="margin-right: 113px;">City </label><span>: {{obj.city}}</span>
+                <label for="inputCity" style="margin-right: 121px;">City </label><span>: {{request.user.city}}</span>
               </div>
 
-              <div class="form-group col-md-12">
-              <label for="inputAddress" style="margin-right: 82px;">Address  </label><span>: {{obj.address}}</span>             
-              </div>
-              {% endfor %}
+              
+              
              <!-- <a href="{% url 'profile_edit_view'  request.user.username %}"><button type="click" class="btn btn-outline-primary">Update Profile</button></a> -->
          </div>
          <!-- Profile Picture -->

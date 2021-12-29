@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
-from core.forms import PaperForm
+from core.forms import PaperForm,FormStatus
 from core.models import Paper,PaperAssign,Reviewer
 from django.contrib import messages
 from django.db.models import Sum,Count
 from django.contrib.auth import get_user_model
 from django.db.models import F
+from datetime import datetime
 
 User = get_user_model()
 # Create your views here.
@@ -20,8 +21,15 @@ class Home(View):
 		if Reviewer.objects.filter(user=request.user).exists():
 			pp=PaperAssign.objects.filter(review=request.user.reviewer.id).exists()
 			if pp:
+				# obj=request.user.reviewer.assigned_paper.select_related('assign_paper').annotate(paper=F('assign_paper')).values('paper')
 				obj=request.user.reviewer.assigned_paper.select_related('assign_paper')
-				context={'obj':obj}
+				obj1=request.user.reviewer.assigned_paper.select_related('assign_paper').annotate(paper=F('assign_paper')).values_list('paper',flat=True)
+				# obj=Paper.objects.filter(id=request.user.reviewer.assigned_paper.select_related('assign_paper').annotate(paper=F('assign_paper')).values_list('assign_paper')).all()
+				context={'mylist': zip(obj, obj1)}
+
+				# context={'obj':obj,'objj':obj1}
+				# context{'mylist'}
+				# breakpoint()
 				return render(request,self.template_name1,context)
 			messages.error(request,"No Any Paper Assigned !",extra_tags="error")
 			return render(request,self.template_name1)
@@ -69,3 +77,33 @@ class UploadPaper(View):
 		context={'form':form}
 
 		return render(request,self.template_name,context)
+
+
+class UpdateReview(View):
+	template_name='core/updatereview.html'
+	form_class = FormStatus
+	def get(self,request,*args,**kwargs):
+		detail_id = kwargs.get('id')
+		# detail_info=Paper.objects.filter(pk=detail_id).values_list('title','description','status','file')
+		detail_info=Paper.objects.filter(pk=detail_id).all()
+		context={'detail_info':detail_info,}
+		# breakpoint()
+		return render(request,self.template_name,context)
+
+	def post(self,request,*args,**kwargs):
+		detail_id = kwargs.get('id')
+		obj=Paper.objects.get(pk=detail_id)
+		obj1=PaperAssign.objects.get(assign_paper=detail_id)
+
+		form=self.form_class(request.POST)
+		breakpoint()
+		if form.is_valid():
+			obj.status=form.cleaned_data.get('status')
+			obj.updated_on=datetime.now()
+			obj1.is_review=True
+			obj.save()
+			obj1.save()
+		# obj1=Paper.objects.filter(pk=detail_id).values_list('updated_on')
+		# context={'obj1':obj1}
+		# breakpoint()
+		return redirect('home_view')

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # Local apps
     'accounts.apps.AccountsConfig',
     'core.apps.CoreConfig',
+    'django_extensions',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,10 @@ AUTH_USER_MODEL = 'accounts.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "signin_view"
+
+
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}

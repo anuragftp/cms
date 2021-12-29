@@ -8,3 +8,9 @@ class PaperForm(forms.ModelForm):
 		# widgets={
 		# 		'description':forms.Textarea(attrs={'rows':3,'cols':10,'class':'form-control mt-3 ','placeholder':'Description'}),
 		# }
+
+class FormStatus(forms.ModelForm):
+	class Meta:
+		model=Paper
+		fields=('title','description','status')
+

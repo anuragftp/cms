@@ -11,7 +11,7 @@ STATUS_CHOICES=[
 ]
 
 class Author(models.Model):
-	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	user = models.OneToOneField(User,related_name='author',on_delete=models.CASCADE)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
 
@@ -25,14 +25,14 @@ class Author(models.Model):
 class Paper(models.Model):
 	title = models.CharField(max_length=100)
 	description = models.CharField(max_length=200)
-	status = models.CharField(max_length=30,default='Pending')
+	status = models.CharField(max_length=30,default='Submitted')
 	file = models.FileField(upload_to='author_files/') # taking files from author
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	created_on = models.DateTimeField(auto_now_add=True)
-	updated_on = models.DateTimeField(auto_now=True)
+	updated_on = models.DateTimeField(null=True)
 
 	class Meta:
-		ordering = ['created_on']
+		ordering = ['-created_on']
 		
 	def __str__(self):
 		return self.title
@@ -54,12 +54,27 @@ class PaperAssign(models.Model):
 	review = models.ForeignKey(Reviewer,related_name='assigned_paper',on_delete=models.CASCADE)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
-	assign_paper = models.ForeignKey(Paper,on_delete=models.CASCADE)
+	assign_paper = models.OneToOneField(Paper,related_name='paper_assign',on_delete=models.CASCADE)
+	is_review = models.BooleanField(default=False)
 
 
 	class Meta:
 		ordering = ['-created_on']
 
 	def __str__(self):
-		return f'{self.review.user.full_name} - {self.assign_paper.title}'
+		return str(self.id)
 # request.user.reviewer.assigned_paper.select_related('assign_paper')
+#return f'{self.review.user.full_name} - {self.assign_paper.title}'
+
+
+class Contact(models.Model):
+	email = models.EmailField(unique=True)
+	description = models.CharField(max_length=200)
+	created_on = models.DateTimeField(auto_now_add=True)
+	updated_on = models.DateTimeField(auto_now=True)
+
+	class Meta:
+		ordering = ['-created_on']
+
+		def __str__(self):
+			return self.email

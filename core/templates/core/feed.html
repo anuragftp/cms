@@ -45,6 +45,7 @@
                   <th scope="col">id</th>
                   <th scope="col">title</th>
                   <th scope="col">Upload Date</th>
+                  <th scope="col">Review Date</th>
                   <th scope="col">Status</th>
                   <th scope="col">View_file</th>
                 </tr>
@@ -55,6 +56,7 @@
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.title}}</td>
                   <td>{{obj.created_on}}</td>
+                  <td>{{obj.updated_on}}</td>
                   <td>{{obj.status}}</td>
                   <td><a href="{{obj.file.url}}"  target="_blank_" class="btn btn-info">View</a></td>
                 </tr>
