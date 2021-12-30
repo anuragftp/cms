@@ -31,12 +31,33 @@
         
       </ul>
       
-      <form method="POST" action="{% url 'signout_view' %}">
-          {% csrf_token %}
-          <button type="submit"   class="btn btn-danger " ><i class="bi bi-box-arrow-right"></i> logout</button>
+      <div class="btn-group">
+
+        {% if user.picture %}
+                        <!-- <a href="{% url 'profile_edit_view' request.user.full_name %}"> -->
+                            <img src="{{ user.picture.url }}"  class="rounded-circle z-depth-0 offset-md-2 " style="height: 50px;width: 60px" id="navbarDropdown"  data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- </a> -->
+                    {% else %}
+                        <img src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"  class="rounded-circle z-depth-0 offset-md-2 " style="height: 50px;width: 50px" id="navbarDropdown"  data-bs-toggle="dropdown" aria-expanded="false">
+                    {% endif %}
+        <!-- <img src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"  class="rounded-circle z-depth-0 offset-md-2 " style="height: 50px;width: 50px" id="navbarDropdown"  data-bs-toggle="dropdown" aria-expanded="false"> -->
+
+
+      <ul class="dropdown-menu dropdown-menu-lg-end">
+          <li><a class="dropdown-item" href="{% url 'profile_view' request.user.full_name %}">View Profile</a></li>
+          <li><a class="dropdown-item" href="{% url 'password_change_view' %}">Change Password</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <form method="POST" action="{% url 'signout_view' %}">
+              {% csrf_token %}
+              <button type="submit"   class="btn form-control " ><i class="bi bi-box-arrow-right"></i> SignOut</button>
           
-          
-        </form>
+            </form>
+          </li>
+        
+      </ul>
+
+    </div>
     </div>
   </div>
 </nav>

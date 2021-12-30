@@ -56,6 +56,9 @@
                 <label for="inputState" style="margin-right: 99px;">Mobile  </label><span>: {{request.user.mobile}}</span>
               </div>
               <div class="form-group col-md-12">
+                <label for="inputCity" style="margin-right: 97px;">Gender </label><span>: {{request.user.gender}}</span>
+              </div>
+              <div class="form-group col-md-12">
               <label for="inputAddress" style="margin-right: 92px;">Address  </label><span>: {{request.user.address}}</span>             
               </div>
     
@@ -63,16 +66,17 @@
                 <label for="inputCity" style="margin-right: 121px;">City </label><span>: {{request.user.city}}</span>
               </div>
 
+
               
               
-             <!-- <a href="{% url 'profile_edit_view'  request.user.username %}"><button type="click" class="btn btn-outline-primary">Update Profile</button></a> -->
+             <!-- <a href="{% url 'profile_edit_view'  request.user.full_name %}"><button type="click" class="btn btn-outline-primary">Update Profile</button></a> -->
          </div>
          <!-- Profile Picture -->
                     
                     <!-- Profile Picture end -->
-                <div class="col-sm-4 my-5">
+                <div class="col-sm-4 my-0">
             {% if user.picture %}
-                        <a href="{% url 'profile_edit_view' request.user.username %}">
+                        <a href="{% url 'profile_edit_view' request.user.full_name %}">
                             <img src="{{ user.picture.url }}" class="img-fluid immP"  height="250px" width="100px">
                         </a>
                     {% else %}

@@ -5,7 +5,7 @@ from core.models import Paper,PaperAssign,Reviewer
 from django.contrib import messages
 from django.db.models import Sum,Count
 from django.contrib.auth import get_user_model
-from django.db.models import F
+from django.db.models import F,Q
 from datetime import datetime
 
 User = get_user_model()
@@ -18,14 +18,16 @@ class Home(View):
 
 
 	def get(self,request):
-		if Reviewer.objects.filter(user=request.user).exists():
-			pp=PaperAssign.objects.filter(review=request.user.reviewer.id).exists()
+		if Reviewer.objects.filter(user=request.user).exists():  
+			obj=PaperAssign.objects.filter(review=request.user.reviewer.id)
+			pp=obj.exists()
 			if pp:
 				# obj=request.user.reviewer.assigned_paper.select_related('assign_paper').annotate(paper=F('assign_paper')).values('paper')
-				obj=request.user.reviewer.assigned_paper.select_related('assign_paper')
+				obj=PaperAssign.objects.filter(review=request.user.reviewer.id)
+				result=PaperAssign.objects.filter(Q(review=request.user.reviewer.id) & Q(is_review=False)).values_list('is_review',flat=True).aggregate(total=Count('is_review'))
 				obj1=request.user.reviewer.assigned_paper.select_related('assign_paper').annotate(paper=F('assign_paper')).values_list('paper',flat=True)
 				# obj=Paper.objects.filter(id=request.user.reviewer.assigned_paper.select_related('assign_paper').annotate(paper=F('assign_paper')).values_list('assign_paper')).all()
-				context={'mylist': zip(obj, obj1)}
+				context={'mylist': zip(obj, obj1),'result':result}
 
 				# context={'obj':obj,'objj':obj1}
 				# context{'mylist'}
@@ -96,7 +98,7 @@ class UpdateReview(View):
 		obj1=PaperAssign.objects.get(assign_paper=detail_id)
 
 		form=self.form_class(request.POST)
-		breakpoint()
+		# breakpoint()
 		if form.is_valid():
 			obj.status=form.cleaned_data.get('status')
 			obj.updated_on=datetime.now()
@@ -107,3 +109,38 @@ class UpdateReview(View):
 		# context={'obj1':obj1}
 		# breakpoint()
 		return redirect('home_view')
+
+
+class ViewAll(View):
+	template_name = 'core/viewallreview.html'
+
+	def get(self,request):
+		obj=PaperAssign.objects.filter(review=request.user.reviewer.id)
+		pp=obj.exists()
+		if pp:
+			obj1=request.user.reviewer.assigned_paper.select_related('assign_paper').annotate(paper=F('assign_paper')).values_list('paper',flat=True)
+			context={'mylist': zip(obj, obj1)}
+			return render(request,self.template_name,context)
+		messages.error(request,"No Any Paper Assigned !",extra_tags="error")
+		return render(request,self.template_name)
+
+class NotReview(View):
+	template_name = 'core/viewallreview.html'
+
+	def get(self,request):
+		obj=PaperAssign.objects.filter(review=request.user.reviewer.id).filter(is_review=False)
+		pp=obj.exists()
+		if pp:
+			obj1=request.user.reviewer.assigned_paper.select_related('assign_paper').annotate(paper=F('assign_paper')).values_list('paper',flat=True)
+			context={'mylist': zip(obj, obj1)}
+			return render(request,self.template_name,context)
+		messages.error(request,"No Any Paper !",extra_tags="error")
+		return render(request,self.template_name)
+class ReReview(View):
+	template_name='core/reviewpaper.html'
+
+	def get(self,request):
+		return render(request,self.template_name)
+
+
+

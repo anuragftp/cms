@@ -32,21 +32,22 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'upload_paper_view' %}">Upload-Paper</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="{% url 'profile_view' request.user.full_name %}">View Profile</a>
-        </li>
+        </li> -->
         
-        <!-- <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Option
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Re-Review</a></li>
+            <li><a class="dropdown-item" href="#"></a></li> 
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">All Approved Paper</a></li>            
+            <!-- <li><a class="dropdown-item" href="{% url 'profile_view' request.user.full_name %}">View Profile</a></li> -->
           </ul>
-        </li> -->
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li> -->
@@ -55,12 +56,29 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form> -->
-      <form method="POST" action="{% url 'signout_view' %}">
-          {% csrf_token %}
-          <button type="submit"   class="btn btn-danger " ><i class="bi bi-box-arrow-right"></i> logout</button>
+
+      <div class="btn-group">
+        {% if user.picture %}
+                        <!-- <a href="{% url 'profile_edit_view' request.user.full_name %}"> -->
+                            <img src="{{ user.picture.url }}"  class="rounded-circle z-depth-0 offset-md-2 " style="height: 50px;width: 60px" id="navbarDropdown"  data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- </a> -->
+                    {% else %}
+                        <img src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"  class="rounded-circle z-depth-0 offset-md-2 " style="height: 50px;width: 50px" id="navbarDropdown"  data-bs-toggle="dropdown" aria-expanded="false">
+                    {% endif %}
+      <ul class="dropdown-menu dropdown-menu-lg-end">
+          <li><a class="dropdown-item" href="{% url 'profile_view' request.user.full_name %}">View Profile</a></li>
+          <li><a class="dropdown-item" href="{% url 'password_change_view' %}">Change Password</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <form method="POST" action="{% url 'signout_view' %}">
+              {% csrf_token %}
+              <button type="submit"   class="btn form-control " ><i class="bi bi-box-arrow-right"></i> SignOut</button>
           
-          
-        </form>
+            </form>
+          </li>
+        
+      </ul>
+
     </div>
   </div>
 </nav>

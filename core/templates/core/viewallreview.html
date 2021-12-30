@@ -2,38 +2,8 @@
 {% load static %}
 {% block content %}
 
-<h2 class="m-4">Welcome To {{request.user.full_name}}</h2>
 <div class="container">
-    <div class="row my-4">
-        <div class="card">
-          <div class="card-header">
-            Reviewer
-          </div>
-          <div class="card-body">
-            <table class="table  table-borderless">
-              <thead class="table-dark">
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Join Date</th>
-                  <th scope="col" class="text-center">Paper for Review</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">{{request.user.full_name}}</th>
-                  <td>{{request.user.created_on|date:"d M Y"}}</td>
-                  <td class="text-center">Total Paper for review {{result.total}}</td>
-                </tr>
-                </tbody>
-            </table>
-
-           
-          </div>
-        </div>
-    </div>
-    <div class="row my-4">
-       
-        <div class="card">
+    <div class="card mt-5">
           <div class="card-header">
             Paper Details
           </div>
@@ -70,23 +40,18 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+
             {%if messages %}
-              {% for message in messages %}
-                <div class="alert alert-danger" role='alert'>
-                        {{message}}
-                </div>
-              {% endfor %}
-            {% endif %}
-            <div class="card-footer">
-              <a class="btn btn-outline-primary" href="{% url 'view_all_view' %}">View All Paper</a>
-            </div>
-            
-            
+            {% for message in messages %}
+              <div class="alert alert-danger" role='alert'>
+                      {{message}}
+              </div>
+            {% endfor %}
+          {% endif %}
             
           </div>
         </div>
-        
-    </div>
 </div>
 <div style="height:10vh;">
     </div>
