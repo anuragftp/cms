@@ -41,6 +41,13 @@
                     </div>
                   </div>
                   <div class=" row my-4">
+                    <label for="inputType" class="col-2 col-form-label">Remarks</label>
+                    <div class="col-10 col-sm-10 mx-auto">
+                      <input type="text" class="form-control-plaintext text-center" name="remarks" id="inputType" value="{{ obj.remarks }}">
+                    </div>
+                  </div>
+
+                  <div class=" row my-4">
                     <label for="inputType" class="col-2 col-form-label">File</label>
                     <div class="col-5 col-sm-3 mx-auto">
                       <a href="{{obj.file.url}}" name="file" target="_blank_" class=" btn btn-outline-info form-control">Download</a>

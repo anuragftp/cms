@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Paper,Author,Reviewer,PaperAssign
+from core.models import Paper,Author,Reviewer,PaperAssign,Contact
 
 # Register your models here.
 
@@ -13,7 +13,12 @@ class AuthorAdmin(admin.ModelAdmin):
 
 class ReviewAdmin(admin.ModelAdmin):
     model=Reviewer
-    list_display=('id','user','created_on','updated_on',)
+    list_display=('user','created_on','updated_on',)
+
+
+class ContactAdmin(admin.ModelAdmin):
+    model=Contact
+    list_display=('email','description','reply','created_on','updated_on',)
 
 class AssignPaperAdmin(admin.ModelAdmin):
     model=Reviewer
@@ -22,4 +27,5 @@ class AssignPaperAdmin(admin.ModelAdmin):
 admin.site.register(Author,AuthorAdmin)
 admin.site.register(Paper,PaperAdmin)
 admin.site.register(Reviewer,ReviewAdmin)
+admin.site.register(Contact,ContactAdmin)
 admin.site.register(PaperAssign,AssignPaperAdmin)

@@ -38,9 +38,12 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="{% url 're_view' %}">Re-Review Paper</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{% url 'NotReview_view' %}">Not Review</a></li>            
+            <li><a class="dropdown-item" href="{% url 'NotReview_view' %}">Assign Paper</a></li>            
             <!-- <li><a class="dropdown-item" href="{% url 'profile_view' request.user.full_name %}">View Profile</a></li> -->
           </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact_view' %}">Contact</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>

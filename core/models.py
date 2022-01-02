@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 STATUS_CHOICES=[
-	('Pending','Pending'),
+	('Submitted','Submitted'),
 	('Approved','Approved'),
 	('Reject','Reject'),
 ]
@@ -28,8 +28,12 @@ class Paper(models.Model):
 	status = models.CharField(max_length=30,default='Submitted')
 	file = models.FileField(upload_to='author_files/') # taking files from author
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	remarks = models.CharField(max_length=255,default='No-Remark')
+	rating = models.IntegerField(default=0)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(null=True)
+	review_by = models.IntegerField(default=0)
+	is_review_submit = models.BooleanField(default=False)
 
 	class Meta:
 		ordering = ['-created_on']
@@ -68,8 +72,10 @@ class PaperAssign(models.Model):
 
 
 class Contact(models.Model):
-	email = models.EmailField(unique=True)
+	email = models.EmailField()
+	user=models.ForeignKey(User,on_delete=models.CASCADE)
 	description = models.CharField(max_length=200)
+	reply=models.CharField(max_length=255)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
 

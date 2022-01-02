@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
-from core.forms import PaperForm,FormStatus
-from core.models import Paper,PaperAssign,Reviewer
+from core.forms import PaperForm,FormStatus,ReviewUpload,ReviewUpdate,ContactForm
+from core.models import Paper,PaperAssign,Reviewer,Contact
 from django.contrib import messages
 from django.db.models import Sum,Count
 from django.contrib.auth import get_user_model
@@ -101,6 +101,10 @@ class UpdateReview(View):
 		# breakpoint()
 		if form.is_valid():
 			obj.status=form.cleaned_data.get('status')
+			if obj.status=="Review":
+				obj.is_review_submit=False
+			obj.remarks=form.cleaned_data.get('remarks')
+			obj.review_by=request.user.id
 			obj.updated_on=datetime.now()
 			obj1.is_review=True
 			obj.save()
@@ -136,11 +140,88 @@ class NotReview(View):
 			return render(request,self.template_name,context)
 		messages.error(request,"No Any Paper !",extra_tags="error")
 		return render(request,self.template_name)
+
 class ReReview(View):
 	template_name='core/reviewpaper.html'
+	def get(self,request):
+		pp=Paper.objects.filter(review_by=request.user.id).filter(status="Review").exists()
+		if pp:
+			obj=Paper.objects.filter(review_by=request.user.id).filter(status="Review").all()
+			context={'obj':obj}
+			# breakpoint()
+			return render(request,self.template_name,context)
+		messages.error(request,"No Any Review-Paper !",extra_tags="error")
+		return render(request,self.template_name)
+
+class ReReviewUpdate(View):
+	template_name='core/reviewpaper.html'
+	form_class = ReviewUpdate
+	def post(self,request,*args,**kwargs):
+		paper_id = kwargs.get('id')
+		obj=Paper.objects.filter(review_by=request.user.id).get(pk=paper_id)
+		form=self.form_class(request.POST)
+		if form.is_valid():
+			obj.status=form.cleaned_data.get('status')
+			if obj.status=="Review":
+				obj.is_review_submit=False
+			obj.remarks = form.cleaned_data.get('remarks')
+			obj.save()
+		# breakpoint()
+		return redirect('home_view')
+
+
+class Review(View):
+	template_name='core/review.html'
+	form_class = ReviewUpload
 
 	def get(self,request):
+		pp=Paper.objects.filter(user=request.user).filter(status="Review").filter(is_review_submit=False).exists()
+		if pp:
+			obj=Paper.objects.filter(user=request.user).filter(status="Review").all()
+			context={'obj':obj}
+			return render(request,self.template_name,context)
+		messages.error(request,"No Any Review-Paper !",extra_tags="error")
 		return render(request,self.template_name)
+
+class ReviewUpload(View):
+	template_name='core/review.html'
+	form_class = ReviewUpload
+	def post(self,request,*args,**kwargs):
+		paper_id = kwargs.get('id')
+		obj=Paper.objects.filter(user=request.user).get(pk=paper_id)
+		form=self.form_class(request.POST,request.FILES)
+		if form.is_valid():
+			obj.is_review_submit=True
+			obj.file=form.cleaned_data.get('file')
+			obj.save()
+		# breakpoint()
+		return redirect('home_view')
+
+
+class ContactView(View):
+	template_name='core/contact.html'
+	form_class=ContactForm
+	
+
+	def get(self,request):
+		form=self.form_class()
+		contact_list=Contact.objects.filter(email=request.user.email).all()[:3]
+		context={'form':form,'contact_list':contact_list}
+		return render(request,self.template_name,context)
+
+	def post(self,request):
+		form=self.form_class(request.POST)
+		contact_list=Contact.objects.all()
+		if form.is_valid():
+			instance=form.save(commit=False)
+			instance.user=request.user
+			instance.save()
+			return redirect('contact_view')
+			
+		context={'form':form,'contact_list':contact_list}
+		return render(request,self.template_name,context)
+
+
 
 
 

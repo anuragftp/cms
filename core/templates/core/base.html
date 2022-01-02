@@ -40,13 +40,16 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Option
           </a>
-          <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Re-Review</a></li>
-            <li><a class="dropdown-item" href="#"></a></li> 
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">All Approved Paper</a></li>            
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'paper_review_view' %}">Re-Review</a></li>
             
-          </ul> -->
+            <!-- <li><hr class="dropdown-divider"></li> -->
+            <!-- <li><a class="dropdown-item" href="#">All Approved Paper</a></li>             -->
+            
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact_view' %}">Contact</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
