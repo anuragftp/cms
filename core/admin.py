@@ -4,8 +4,8 @@ from core.models import Paper,Author,Reviewer,PaperAssign,Contact
 # Register your models here.
 
 class PaperAdmin(admin.ModelAdmin):
-    model=Reviewer
-    list_display=('id','title','description','status','file','user','created_on','updated_on',)
+    model=Paper
+    list_display=('id','title','description','status','file','user','remarks','created_on','review_date','review_by',)
 
 class AuthorAdmin(admin.ModelAdmin):
     model=Author
