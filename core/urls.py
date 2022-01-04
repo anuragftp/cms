@@ -14,10 +14,10 @@ from core.views import (
    )
 urlpatterns=[
    # path('home/',home,name='home'),
-   path('feed/',login_required(Home.as_view()),name='home_view'),
+   path('feed/dashboard',login_required(Home.as_view()),name='home_view'),
    path('feed/author/upload_paper/',login_required(UploadPaper.as_view()),name='upload_paper_view'),
    path('feed/reviewer/update_review/<int:id>',login_required(UpdateReview.as_view()),name='update_review_view'),
-   path('feed/author/contact/',login_required(ContactView.as_view()),name='contact_view'),
+   path('feed/dashboard/contact/',login_required(ContactView.as_view()),name='contact_view'),
    path('feed/author/review',login_required(Review.as_view()),name='paper_review_view'),
    path('feed/author/review/<int:id>',login_required(ReviewUpload.as_view()),name='ReUpload_view'),
    path('feed/reviewer/view_all/',login_required(ViewAll.as_view()),name='view_all_view'),
