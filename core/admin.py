@@ -5,7 +5,7 @@ from core.models import Paper,Author,Reviewer,PaperAssign,Contact
 
 class PaperAdmin(admin.ModelAdmin):
     model=Paper
-    list_display=('id','title','description','status','file','user','remarks','created_on','review_date','review_by',)
+    list_display=('id','title','description','status','file','user','remarks','rating','created_on','review_date','review_by',)
 
 class AuthorAdmin(admin.ModelAdmin):
     model=Author

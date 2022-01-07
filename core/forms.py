@@ -12,12 +12,12 @@ class PaperForm(forms.ModelForm):
 class FormStatus(forms.ModelForm):
 	class Meta:
 		model=Paper
-		fields=('title','description','status','remarks')
+		fields=('title','description','status','remarks','rating')
 
 class ReviewUpdate(forms.ModelForm):
 	class Meta:
 		model=Paper
-		fields=('status','remarks')
+		fields=('status','remarks','rating')
 
 class ReviewUpload(forms.ModelForm):
 	class Meta:

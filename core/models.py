@@ -29,10 +29,10 @@ class Paper(models.Model):
 	file = models.FileField(upload_to='author_files/') # taking files from author
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	remarks = models.CharField(max_length=255,default='No-Remark')
-	# rating = models.IntegerField(default=0)
+	rating = models.IntegerField(default=0)
 	created_on = models.DateTimeField(auto_now_add=True)
 	review_date = models.DateTimeField(null=True)
-	review_by = models.IntegerField(default=0)
+	review_by = models.IntegerField(null=True)
 	is_review_submit = models.BooleanField(default=False)
 
 	class Meta:

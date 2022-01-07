@@ -104,6 +104,7 @@ class UpdateReview(View):
 			if obj.status=="Review":
 				obj.is_review_submit=False
 			obj.remarks=form.cleaned_data.get('remarks')
+			obj.rating=form.cleaned_data.get('rating')
 			obj.review_by=request.user.id
 			obj.review_date=datetime.now()
 			obj1.is_review=True
@@ -165,6 +166,7 @@ class ReReviewUpdate(View):
 			if obj.status=="Review":
 				obj.is_review_submit=False
 			obj.remarks = form.cleaned_data.get('remarks')
+			obj.rating = form.cleaned_data.get('rating')
 			obj.review_date=datetime.now()
 			obj.save()
 		# breakpoint()

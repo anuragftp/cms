@@ -37,6 +37,9 @@
                 <div class="mb-3 col-6 my-5">
                       <label for="inputFile">File</label>
                       <input type="file" id="inputFile" name="file" class="form-control {% if form.file.errors %}is-invalid{% endif %}" >
+                      <div class="invalid-feedback">
+                                       {{ form.file.errors}}
+                                    </div>
 
                 </div>
                  

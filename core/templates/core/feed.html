@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 
+
 <h2 class="m-4">Welcome To {{request.user.full_name}}</h2>
 <div class="container">
     <div class="row my-4">
@@ -33,9 +34,20 @@
     </div>
     <div class="row my-4">
        
-        <div class="card">
-          <div class="card-header">
-            Paper Details
+        <div class="card ">
+          <div class="card-header d-flex">
+            <span>Paper Details</span>
+            <div class="ml-auto">
+              
+             
+              
+              <!-- <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span> -->
+            </div>
+            
           </div>
 
           <div class="card-body ">
@@ -48,6 +60,7 @@
                   <th scope="col">Review Date</th>
                   <th scope="col">Status</th>
                   <th scope="col">View_file</th>
+                  <th scope="col">Rating</th>
                 </tr>
               </thead>
               <tbody>
@@ -59,6 +72,7 @@
                   <td>{{obj.review_date}}</td>
                   <td>{{obj.status}}</td>
                   <td><a href="{{obj.file.url}}"   class="btn btn-info">View</a></td>
+                  <td id="rating1">{{obj.rating}}/5</td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -78,7 +92,11 @@
 </div>
 <div style="height:10vh;">
     </div>
+<!-- <script>
+  var a=document.getElementById('rating1').innerHTML;
+  console.log(a);
 
+</script> -->
 
 {% endblock %}
 

@@ -46,6 +46,19 @@
                       <input type="text" class="form-control-plaintext text-center" name="remarks" id="inputType" value="{{ obj.remarks }}">
                     </div>
                   </div>
+                  <div class=" row my-4">
+                    <label for="inputType" class="col-2 col-form-label">Rating</label>
+                    <div class="col-5 col-sm-3 mx-auto">
+                      <select id="inputType" class="form-control text-center" name="rating" >
+                      <option selected>{{obj.rating}}</option>
+                      <!-- <option>Pending</option> -->
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option><option>4</option>
+                      <option>5</option>
+                    </select>
+                    </div>
+                  </div>
 
                   <div class=" row my-4">
                     <label for="inputType" class="col-2 col-form-label">File</label>
