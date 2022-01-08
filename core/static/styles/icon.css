@@ -1,0 +1,110 @@
+body {
+  
+  /*background:url("img2.jpg");*/
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 100%;
+  margin: 0;
+  
+  padding: 0;
+}
+
+/*h1 {
+  text-align: center;
+  color: #999;
+  background: rgba(0, 0, 0, 0.36);
+  margin: 0;
+  padding: 5px;
+}
+h2 {
+  text-align: center;
+  color: #999; 
+  margin: 0;
+  padding: 5px;
+  font-size: 1.8em;
+  margin-bottom: 30px;
+} */
+ 
+.wrapper,.copyright {
+  padding: 20px;
+  text-align: center;
+}
+/*hr{
+  margin: 30px 20px;
+  border-top:2px solid #1C1E26 ;
+  border-bottom:2px solid #38404D;
+}*/
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+/*social-icons icon-circle icon-rotate */
+.list-inline li {
+  display: inline-block;
+  padding-right: 2px;
+  padding-left: 2px;
+  margin-bottom: 10px;
+}
+/*---- Genral classes end -------*/
+
+/*Change icons size here*/
+.social-icons .bi {
+  font-size: 1.0em;
+}
+/*Change icons circle size and color here*/
+.social-icons .bi {
+  width: 20px;
+  height: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #FFF;
+  color: rgba(255, 255, 255, 0.8);
+  /*-webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;*/
+}
+
+.social-icons.icon-circle .bi{ 
+  border-radius: 50%;
+}
+.social-icons.icon-rounded .bi{
+  border-radius:5px;
+}
+.social-icons.icon-flat .bi{
+  border-radius: 0;
+}
+
+.social-icons .bi:hover, .social-icons .bi:active {
+  color: #FFF;
+/*  -webkit-box-shadow: 1px 1px 3px #333;
+  -moz-box-shadow: 1px 1px 3px #333;
+  box-shadow: 1px 1px 3px #333; */
+}
+/*.social-icons.icon-zoom .fa:hover, .social-icons.icon-zoom .fa:active { 
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1); 
+}*/
+.social-icons.icon-rotate .bi:hover, .social-icons.icon-rotate .bi:active { 
+  -webkit-transform: scale(1.1) rotate(360deg);
+  -moz-transform: scale(1.1) rotate(360deg);
+  -ms-transform: scale(1.1) rotate(360deg);
+  -o-transform: scale(1.1) rotate(360deg);
+  transform: scale(1.1) rotate(360deg);
+}
+ 
+
+.social-icons .bi-facebook,.social-icons .bi-facebook-square{}  
+
+.social-icons .bi-github,.social-icons .bi-github-alt,.social-icons .bi-github-square{} 
+.social-icons .bi-google-plus,.social-icons .bi-google-plus-square{} 
+
+.social-icons .bi-instagram{}
+.social-icons .bi-linkedin,.social-icons .bi-linkedin-square{} 
+
+
+.social-icons .bi-twitter,.social-icons .bi-twitter-square{} 
+

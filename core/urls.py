@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 from core.views import (
       Home,
+      Userhomepage,
       UploadPaper,
       UpdateReview,
       ContactView,
@@ -13,8 +14,8 @@ from core.views import (
       ReReviewUpdate,
    )
 urlpatterns=[
-   # path('home/',home,name='home'),
-   path('feed/dashboard',login_required(Home.as_view()),name='home_view'),
+   path('',Home.as_view(),name='home'),
+   path('feed/dashboard',login_required(Userhomepage.as_view()),name='home_view'),
    path('feed/author/upload_paper/',login_required(UploadPaper.as_view()),name='upload_paper_view'),
    path('feed/reviewer/update_review/<int:id>',login_required(UpdateReview.as_view()),name='update_review_view'),
    path('feed/dashboard/contact/',login_required(ContactView.as_view()),name='contact_view'),

@@ -1,0 +1,120 @@
+.scroll-top{
+    position: fixed;
+    bottom:0px;
+    
+    right: 10px;
+    width: 43px;
+    height: 40px;
+    color: blueviolet;
+
+    z-index: 100;
+}
+
+.round__button{
+    height: 45px;
+    width: 45px;
+    text-align: center;
+    transition-duration: 400ms;
+}
+
+
+
+
+
+
+.neumorphic__button{
+    border-radius: 16px;
+    background: #e0e0e0;
+    box-shadow:  12px 12px 24px #9b9b9b,
+             -12px -12px 24px #ffffff;
+    transition-duration: 400ms;
+}
+.text-cent
+{
+  text-align:center;
+}
+
+.text-just{
+
+  text-align: justify;
+  text-justify: inter-word;
+
+}
+
+
+.fontt{
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.footer1{
+     
+     
+    
+    position: sticky;
+    width: 100%;
+     margin-bottom: 0px;
+    
+      
+     
+}
+.navbar1{
+     
+     box-shadow: -13px -20px 20px 20px #b5d3ff;
+    
+    position: sticky;
+
+     width: 100%;
+     z-index: 1000;
+    
+      
+     top: 0px;
+
+    }
+
+/*@media (max-height:800px) {
+    .navbar1{
+     
+     box-shadow: -13px -20px 20px 20px #b5d3ff;
+    
+    position: sticky;
+
+     width: 100%;
+     z-index: 1000;
+    
+      
+     top: 0px;
+}
+    }*/
+
+
+  @media (max-width:1200px) {
+    div div .fnm {
+        
+        padding: 6px;
+        text-align: center;
+       
+        font-size: 14px;
+       
+       
+    }
+    
+@media (max-width:920px) {
+    div div .fnm {
+        
+        padding: 6px;
+        text-align: center;   
+        
+        font-size: 8px;
+       
+       
+    }
+    @media (max-width:520px) {
+    div div .fnm {
+       
+       padding: 6px;
+        text-align: center;
+        font-size: 8px;
+
+    }
+
