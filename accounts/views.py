@@ -83,7 +83,7 @@ class SignUpView(View):
 class SignOutView(View):
 	def post(self,request,*args,**kwargs):
 		logout(request)
-		return redirect('signin_view')
+		return redirect('home')
 
 class PRView(PasswordResetView):
 	template_name='accounts/password_reset.html'

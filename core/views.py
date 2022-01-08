@@ -13,7 +13,7 @@ User = get_user_model()
 
 
 class Home(View):
-	template_name='core/home/homepage1.html'
+	template_name='core/home/homepage.html'
 
 	def get(self,request):
 		return render(request,self.template_name)
