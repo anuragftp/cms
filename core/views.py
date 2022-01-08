@@ -18,6 +18,22 @@ class Home(View):
 	def get(self,request):
 		return render(request,self.template_name)
 
+class Publish(View):
+	template_name='core/home/publish.html'
+
+	def get(self,request):
+		obj=Paper.objects.filter(status="Approved")
+		if obj.exists():
+			delta=[]
+			for i in obj:
+				delta.append((datetime.now().date()-i.review_date.date()).days)
+			context={'mylist': zip(obj, delta)}
+			# breakpoint()
+			return render(request,self.template_name,context)
+		messages.error(request,"No Paper Yet !",extra_tags="error")
+		# breakpoint()
+		return render(request,self.template_name)
+
 class Userhomepage(View):
 	template_name='core/feed.html'
 	template_name1='core/reviewer.html'
