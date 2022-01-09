@@ -34,10 +34,10 @@
                             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="#aboutPage">About Us</a>
+                            <a class="nav-link " aria-current="page" href="{% url 'home' %}#aboutPage">About Us</a>
                         </li>
                         <li class="nav-item"> 
-                            <a class="nav-link" href="#service">Services</a>
+                            <a class="nav-link" href="{% url 'home' %}#service">Services</a>
                         </li>
                         <li class="nav-item"> 
                             <a class="nav-link" href="{% url 'contact_view' %}">Contact Us</a>
