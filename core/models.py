@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from core.validators import validate_is_pdf
 
 # Create your models here.
 User = get_user_model()
@@ -26,7 +27,7 @@ class Paper(models.Model):
 	title = models.CharField(max_length=100)
 	description = models.CharField(max_length=200)
 	status = models.CharField(max_length=30,default='Submitted')
-	file = models.FileField(upload_to='author_files/') # taking files from author
+	file = models.FileField(upload_to='author_files/',validators=(validate_is_pdf,)) # taking files from author
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	remarks = models.CharField(max_length=255,default='No-Remark')
 	rating = models.IntegerField(default=0)

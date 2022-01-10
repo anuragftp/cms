@@ -69,7 +69,7 @@
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.title}}</td>
                   <td>{{obj.created_on | date:"d M Y"}}</td>
-                  <td>{{obj.review_date}}</td>
+                  <td>{{obj.review_date | date:"d M Y"}}</td>
                   <td>{{obj.status}}</td>
                   <td><a href="{{obj.file.url}}"   class="btn btn-info">View</a></td>
                   <td id="rating1">{{obj.rating}}/5</td>

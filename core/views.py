@@ -102,6 +102,9 @@ class UploadPaper(View):
 
 		return render(request,self.template_name,context)
 
+# def validate_file_extension(value):
+#     if not value.name.endswith('.pdf'):
+#         raise ValidationError(u'Error message')
 
 class UpdateReview(View):
 	template_name='core/updatereview.html'
