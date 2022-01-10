@@ -1,9 +1,31 @@
 <!-- sticky footer -->
-<footer class="footer mt-auto  bg-light">
+<!-- <footer class="footer mt-auto  bg-light">
   <div class="container-fluid "  style="background-color:#001D38;">
     <div class="row">
           <div class="col-sm-6 py-4 mx-auto text-center" style="width:auto"><span class="text-muted"><strong>Copyright &copy; 2022 - All Rights Reserved </strong></span> 
           </div>
     </div>
   </div>
-</footer>
+</footer> -->
+{% load static %}
+        <link href="{% static 'styles/bootstrapmin.css'%}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/icon.css'%}">
+
+
+<footer class="footer1 mt-auto  bg-light">
+            <div class="container-fluid"  style="background-color:#001D38;">
+                <div class="row">
+                    <div class="col-sm-6 pt-4 mx-auto " style="width:auto"><span class="text-muted"><strong>Copyright &copy; 2022 CMS - All Rights Reserved </strong></span> 
+                    </div>
+                    <div class="col-sm-4 pt-4 mx-auto"  style="width:auto"> 
+                        <ul class=" social-icons   list-inline">
+                            <li><strong class="text-muted">Follow Us On:</strong></li>
+                            <li> <a href="https://in.linkedin.com/"><i class="bi bi-linkedin"></i></a></li> 
+                            <li> <a href="https://myaccount.google.com/"><i class="bi bi-google"></i></a></li> 
+                            <li> <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a></li> 
+                            <li> <a href="https://twitter.com/"><i class="bi bi-twitter"></i></a></li>  
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
