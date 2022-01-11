@@ -19,7 +19,7 @@ class User(AbstractUser):
     # Optional fields
     bio = models.TextField(null=True, blank=True, help_text='Provide your personal information, even if the account is used for a business, a pet or something else. This won\'t be a part of your public profile.')
     # website = models.URLField(null=True, blank=True)
-    mobile = models.CharField(max_length=20, null=True, blank=True)
+    mobile = models.CharField(max_length=12, null=True, blank=True)
     address = models.CharField(max_length=100,null=True,blank=True)
     city = models.CharField(max_length=50,null=True,blank=True)
     # pincode=models.IntegerField(max_length=10,null=True,blank=True)
