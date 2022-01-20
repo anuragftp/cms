@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from core.validators import validate_is_pdf
+import os
 
 # Create your models here.
 User = get_user_model()
@@ -41,6 +42,9 @@ class Paper(models.Model):
 		
 	def __str__(self):
 		return self.title
+
+	def filename(self):
+		return os.path.basename(self.file.name)
 
 
 class Reviewer(models.Model):

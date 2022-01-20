@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404
 from django.views.generic import View
 from core.forms import PaperForm,FormStatus,ReviewUpload,ReviewUpdate,ContactForm
 from core.models import Paper,PaperAssign,Reviewer,Contact
@@ -7,6 +7,13 @@ from django.db.models import Sum,Count
 from django.contrib.auth import get_user_model
 from django.db.models import F,Q
 from datetime import datetime
+import os
+from django.conf import settings
+
+
+from django.http import FileResponse
+from django.views.generic.detail import BaseDetailView
+# from wagtail.documents.views import serve
 
 User = get_user_model()
 # Create your views here.
@@ -105,6 +112,27 @@ class UploadPaper(View):
 # def validate_file_extension(value):
 #     if not value.name.endswith('.pdf'):
 #         raise ValidationError(u'Error message')
+
+class DisplayPdfView(BaseDetailView):
+	template_name='core/home/openpdf.html'
+	def get(self,request,*args,**kwargs):
+		objkey = self.kwargs.get('id', None)
+		pdf = get_object_or_404(Paper, pk=objkey)
+		# breakpoint()
+		fname = pdf.filename()
+		path = os.path.join(settings.MEDIA_ROOT, "author_files", fname)
+		response = FileResponse(open(path, 'rb'), content_type="application/pdf")
+		# response["Content-Disposition"] = 'inline; fname'
+		# response = serve.serve(request, objkey, fname)
+		contdisp = response['Content-Disposition']
+		response['Content-Disposition'] = "; ".join(
+        		[x for x in contdisp.split("; ") if x != "attachment"]
+			)		
+		# breakpoint()
+		# context={'response':response}
+		# return render(request,self.template_name,context)
+		return response
+	        
 
 class UpdateReview(View):
 	template_name='core/updatereview.html'

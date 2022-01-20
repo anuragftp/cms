@@ -11,11 +11,25 @@
         <div class="card-body">
           {% for obj,day in mylist %}
             <div class="d-flex w-100 justify-content-between">
-            <h4 class="card-title lead" style="letter-spacing: 1px;"><strong><a href="{{obj.file.url}}">{{obj.title}}</a></strong> </h4>
+              <h4 class="card-title lead" style="letter-spacing: 1px;">
+                <strong>
+                  <a href="{%  url 'publish_view_pdf' obj.id %}">                     
+                    {{obj.title|title }}
+                  </a>
+                 </strong> 
+              </h4>
+              <div><span class="fa fa-star {% if obj.rating >= 1 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if obj.rating >= 2 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if obj.rating >= 3 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if obj.rating >= 4 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if obj.rating >= 5 %} checked {% endif %}"></span>
+
+              </div>
             
             </div>
             <div class="d-flex w-100 justify-content-between">
-              <p class="card-text" style="letter-spacing: 2px;"><span class=" fw-bold text-bold  fs-6">{{obj.description}}</span><span class="text-success fw-bold fs-7"> ~{{obj.user.full_name}}</span><span class="text-muted"> (Author)</span></p>
+              <p class="card-text" style="letter-spacing: 2px;"><span class=" fw-bold text-bold  fs-6">{{obj.description}}</span><span class="text-success fw-bold fs-7"> ~{{obj.user.full_name}}</span><span class="text-muted"> (Author)</span>
+              </p>
               <small>{{obj.rating}}/5 | {{day}} days ago  </small>
             </div>
             <hr>
@@ -34,9 +48,7 @@
         
     </div>
   </div>
-
   
-
   <div style="height:15vh;">
   </div>
 
