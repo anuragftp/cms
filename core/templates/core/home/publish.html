@@ -10,14 +10,15 @@
         </div>
         <div class="card-body">
           {% for obj,day in mylist %}
+            {% if obj.rating >= 2 %}
+            <!-- <embed src=" {{obj.file.url}} " type="application/pdf" width="100%" height="600px" /> -->
             <div class="d-flex w-100 justify-content-between">
-              <h4 class="card-title lead" style="letter-spacing: 1px;">
+              <h6 class=" lead" style="letter-spacing: 1px;">
                 <strong>
-                  <a href="{%  url 'publish_view_pdf' obj.id %}">                     
-                    {{obj.title|title }}
-                  </a>
+                  
+                  <a href="{{ obj.file.url }}">{{obj.title|title}}</a>
                  </strong> 
-              </h4>
+              </h6>
               <div><span class="fa fa-star {% if obj.rating >= 1 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if obj.rating >= 2 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if obj.rating >= 3 %} checked {% endif %}"></span>
@@ -33,6 +34,7 @@
               <small>{{obj.rating}}/5 | {{day}} days ago  </small>
             </div>
             <hr>
+            {% endif %}
           {% endfor %}
         </div>
         
@@ -48,7 +50,7 @@
         
     </div>
   </div>
-  
+
   <div style="height:15vh;">
   </div>
 

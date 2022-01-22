@@ -9,6 +9,7 @@ from django.db.models import F,Q
 from datetime import datetime
 import os
 from django.conf import settings
+from django.http import HttpResponse
 
 
 from django.http import FileResponse
@@ -76,15 +77,7 @@ class Userhomepage(View):
 			return render(request,self.template_name)
 
 
-# class Home(View):
-# 	template_name="core/reviewer.html"
 
-# 	def get(self,request):
-# 		obj=request.user.reviewer.assigned_paper.select_related('assigned_paper__assign_paper').annotate(paper=F('assign_paper')).values('paper')
-# 		# obj=request.user.reviewer.assigned_paper.select_related('assign_paper')
-# 		context={'obj':obj}
-# 		breakpoint()
-# 		return render(request,self.template_name,context)
 
 class UploadPaper(View):
 	template_name='core/uploadpaper.html'
@@ -113,25 +106,19 @@ class UploadPaper(View):
 #     if not value.name.endswith('.pdf'):
 #         raise ValidationError(u'Error message')
 
-class DisplayPdfView(BaseDetailView):
-	template_name='core/home/openpdf.html'
-	def get(self,request,*args,**kwargs):
-		objkey = self.kwargs.get('id', None)
-		pdf = get_object_or_404(Paper, pk=objkey)
-		# breakpoint()
-		fname = pdf.filename()
-		path = os.path.join(settings.MEDIA_ROOT, "author_files", fname)
-		response = FileResponse(open(path, 'rb'), content_type="application/pdf")
-		# response["Content-Disposition"] = 'inline; fname'
-		# response = serve.serve(request, objkey, fname)
-		contdisp = response['Content-Disposition']
-		response['Content-Disposition'] = "; ".join(
-        		[x for x in contdisp.split("; ") if x != "attachment"]
-			)		
-		# breakpoint()
-		# context={'response':response}
-		# return render(request,self.template_name,context)
-		return response
+
+
+# class DisplayPdfView(BaseDetailView):
+# 	template_name='core/home/openpdf.html'
+# 	def get(self,request,*args,**kwargs):
+# 		objkey = self.kwargs.get('id', None)
+# 		pdf = get_object_or_404(Paper, pk=objkey)
+# 		# breakpoint()
+# 		fname = pdf.filename()
+# 		path = os.path.join(settings.MEDIA_ROOT, "author_files", fname)
+# 		response = FileResponse(open(path, 'rb'), content_type="pdf")
+
+# 		return response
 	        
 
 class UpdateReview(View):
@@ -169,6 +156,7 @@ class UpdateReview(View):
 		return redirect('home_view')
 
 
+	
 class ViewAll(View):
 	template_name = 'core/viewallreview.html'
 

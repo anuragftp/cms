@@ -13,12 +13,11 @@ from core.views import (
       ReviewUpload,
       ReReviewUpdate,
       Publish,
-      DisplayPdfView
+
    )
 urlpatterns=[
    path('',Home.as_view(),name='home'),
    path('view-publish/',Publish.as_view(),name='publish_view'),
-   path('view-publish/<int:id>',DisplayPdfView.as_view(),name='publish_view_pdf'),
    path('feed/dashboard',login_required(Userhomepage.as_view()),name='home_view'),
    path('feed/author/upload_paper/',login_required(UploadPaper.as_view()),name='upload_paper_view'),
    path('feed/reviewer/update_review/<int:id>',login_required(UpdateReview.as_view()),name='update_review_view'),

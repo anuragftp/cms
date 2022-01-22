@@ -59,8 +59,9 @@
                   <th scope="col">Upload Date</th>
                   <th scope="col">Review Date</th>
                   <th scope="col">Status</th>
-                  <th scope="col">View_file</th>
                   <th scope="col">Rating</th>
+                  <th scope="col">View_file</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -71,8 +72,9 @@
                   <td>{{obj.created_on | date:"d M Y"}}</td>
                   <td>{{obj.review_date | date:"d M Y"}}</td>
                   <td>{{obj.status}}</td>
-                  <td><a href="{{obj.file.url}}"   class="btn btn-info">View</a></td>
                   <td id="rating1">{{obj.rating}}/5</td>
+                  <td><a href="{{obj.file.url}}"   class="btn btn-info">View</a></td>
+                  
                 </tr>
                 {% endfor %}
                 </tbody>
