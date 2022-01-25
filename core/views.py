@@ -102,6 +102,16 @@ class UploadPaper(View):
 
 		return render(request,self.template_name,context)
 
+class DeletePaper(View):
+	template_name="core/feed.html"
+	def get(self,request,*args,**kwargs):
+		paper_key=self.kwargs.get('id',None)
+		result=Paper.objects.filter(id=paper_key).filter(status="Submitted")
+		# breakpoint()
+		if result.exists():
+			result.delete()
+		return redirect('home_view')
+
 # def validate_file_extension(value):
 #     if not value.name.endswith('.pdf'):
 #         raise ValidationError(u'Error message')

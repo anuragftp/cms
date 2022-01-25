@@ -13,14 +13,14 @@
           <div class="card-body">
             <table class="table  table-borderless">
               <thead class="table-dark">
-                <tr>
+                <tr class="text-center">
                   <th scope="col">Name</th>
                   <th scope="col">Join Date</th>
                   <th scope="col">Paper Upload(Total)</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr class="text-center">
                   <th scope="row">{{request.user.full_name}}</th>
                   <td>{{request.user.created_on|date:"d M Y"}}</td>
                   <td>{{obj1.total_paper}}</td>
@@ -53,27 +53,36 @@
           <div class="card-body ">
             <table class="table table-responsive-sm table-borderless">
               <thead class="table-dark">
-                <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">title</th>
+                <tr class="text-center">
+                  <!-- <th scope="col">#</th> -->
+                  <th scope="col">Title</th>
                   <th scope="col">Upload Date</th>
                   <th scope="col">Review Date</th>
                   <th scope="col">Status</th>
                   <th scope="col">Rating</th>
-                  <th scope="col">View_file</th>
+                  <th scope="col">Action</th>
                   
                 </tr>
               </thead>
               <tbody>
                 {% for obj in obj %}
-                <tr>
-                  <th scope="row">{{obj.id}}</th>
+                <tr >
+                  <!-- <th scope="row">{{obj.id}}</th> -->
                   <td>{{obj.title}}</td>
-                  <td>{{obj.created_on | date:"d M Y"}}</td>
-                  <td>{{obj.review_date | date:"d M Y"}}</td>
-                  <td>{{obj.status}}</td>
-                  <td id="rating1">{{obj.rating}}/5</td>
-                  <td><a href="{{obj.file.url}}"   class="btn btn-info">View</a></td>
+                  <td class="text-center">{{obj.created_on | date:"d M Y"}}</td>
+                  <td class="text-center">{{obj.review_date | date:"d M Y"}}</td>
+                  <td class="text-center">{{obj.status}}</td>
+                  <td class="text-center" id="rating1">{{obj.rating}}/5</td>
+                  <td>
+                    <a href="{{obj.file.url}}" class="btn btn-primary mx-1">
+                     <img src="{% static 'image/download1.png' %} " width="20px" height="20px;" >
+                    </a>
+                     {% if obj.status == "Submitted" %}
+                      <a href="{% url 'delete_paper_view' obj.id %}" class="btn btn-danger">    
+                            <img src="{% static 'image/delete.png' %} " width="20px" height="20px;" >
+                          </a>
+                          {% endif %}
+                  </td>
                   
                 </tr>
                 {% endfor %}

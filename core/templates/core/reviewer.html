@@ -4,34 +4,35 @@
 
 <h2 class="m-4">Welcome To {{request.user.full_name}}</h2>
 <div class="container">
-    <div class="row my-4">
+    <div class="row my-4 mx-auto">
         <div class="card">
           <div class="card-header">
             Reviewer
           </div>
-          <div class="card-body">
-            <table class="table  table-borderless">
-              <thead class="table-dark">
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Join Date</th>
-                  <th scope="col" class="text-center">Paper for Review</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">{{request.user.full_name}}</th>
-                  <td>{{request.user.created_on|date:"d M Y"}}</td>
-                  <td class="text-center">Total Paper for review {{result.total}}</td>
-                </tr>
+          <div class="card-body ">
+            <div class="table-responsive">
+              <table class="table  table-borderless">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col" >Join Date</th>
+                    <th scope="col" class="text-center">Paper for Review</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">{{request.user.full_name}}</th>
+                    <td>{{request.user.created_on|date:"d M Y"}}</td>
+                    <td class="text-center"><strong>{{result.total}}</strong></td>
+                  </tr>
                 </tbody>
-            </table>
-
+              </table>
+              </div>
            
           </div>
         </div>
     </div>
-    <div class="row my-4">
+    <div class="row my-4 mx-auto">
        
         <div class="card">
           <div class="card-header">
@@ -42,11 +43,9 @@
             <table class="table  table-borderless">
               <thead class="table-dark">
                 <tr>
-                  <th scope="col">id</th>
-                  <!-- <th scope="col">title</th> -->
-                  <th scope="col" >Assigned Date</th>
+                  <th scope="col">Id</th>
+                  <th scope="col" class="text-center">Assigned Date</th>
                   <th scope="col" class="text-center">Review Status</th>
-                  <!-- <th scope="col">Paper_id</th> -->
                   <th scope="col"  class="text-center">View Assign Paper</th>
                 </tr>
               </thead>
@@ -55,8 +54,8 @@
                 {% for x,y in mylist %}
                 <tr>
                   <th scope="row">{{x.id}}</th>
-                  <!-- <td>{{obj.title}}</td> -->
-                  <td>{{x.created_on}}</td>
+                  
+                  <td class="text-center">{{x.created_on|date:"d M Y"}}</td>
                   <td class="text-center">
                     {% if x.is_review %}
                       <input class="form-check-input " type="checkbox"  checked disabled>
@@ -64,7 +63,7 @@
                     <input class="form-check-input " type="checkbox"  disabled>
                     {% endif %}
                   </td>
-                  <td class="text-center"><a href="{% url 'update_review_view' y %}"  target="_blank_" class="btn btn-info ">Click Here</a></td>
+                  <td class="text-center"><a href="{% url 'update_review_view' y %}"  target="_blank_" class="btn  "><img src="{% static 'image/edit.png' %}" width="30px" height="30px"></a></td>
 
                 </tr>
                 {% endfor %}
@@ -77,8 +76,8 @@
                 </div>
               {% endfor %}
             {% endif %}
-            <div class="card-footer">
-              <a class="btn btn-outline-primary" href="{% url 'view_all_view' %}">View All Paper</a>
+            <div class="card-footer text-right">
+              <a class="btn btn-primary" href="{% url 'view_all_view' %}" style="margin-right: 100px;">View All Paper</a>
             </div>
             
             

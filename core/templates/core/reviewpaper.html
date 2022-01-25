@@ -14,12 +14,12 @@
               <thead class="table-dark">
                 <tr>
                   <th scope="col">id</th>
-                  <th scope="col">title</th>
+                  <th scope="col" class="text-center">title</th>
                   
-                  <th scope="col">Remark</th>
-                  <th scope="col">Rating</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">View_file</th>
+                  <th scope="col" class="text-center">Remark</th>
+                  <th scope="col" class="text-center">Rating</th>
+                  <th scope="col" class="text-center">Status</th>
+                  <th scope="col" class="text-center">View_file</th>
                   <th scope="col">Is_Submit</th>
                   <th scope="col" class="text-center">Action</th>
                 </tr>
@@ -30,7 +30,7 @@
                     {% csrf_token %}
                 <tr>
                   <th scope="row">{{obj.id}}</th>
-                  <td>{{obj.title}}</td>
+                  <td class="text-center">{{obj.title}}</td>
                   
                   <td><div class="">
                       <input type="text" class="form-control text-center" name="remarks" id="inputType" value="{{ obj.remarks }}">
@@ -56,7 +56,9 @@
                       <option>Review</option>
                     </select>
                     </div></td>
-                  <td><a href="{{obj.file.url}}"   class="btn btn-info">View</a></td>
+                  <td class="text-center"><a href="{{obj.file.url}}" class="btn btn-primary ">
+                     <img src="{% static 'image/download1.png' %} " width="20px" height="20px;" >
+                    </a></td>
                   <td class="text-center">
                       {% if obj.is_review_submit %}
                         <input class="form-check-input " type="checkbox"  checked disabled>
@@ -64,7 +66,7 @@
                         <input class="form-check-input " type="checkbox"  disabled>
                       {% endif %}
                   </td>
-                  <td class="text-center"><input type="submit" class="btn btn-outline-success"></td>
+                  <td class="text-center"><input type="submit" class="btn btn-success"></td>
                 </tr>
                 </form>
                 {% endfor %}
