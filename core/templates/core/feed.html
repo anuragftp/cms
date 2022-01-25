@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<h2 class="m-4">Welcome To {{request.user.full_name}}</h2>
+<h2 class="m-4">Welcome To {{request.user.full_name|title}}</h2>
 <div class="container">
     <div class="row my-4">
         <div class="card">
@@ -21,7 +21,7 @@
               </thead>
               <tbody>
                 <tr class="text-center">
-                  <th scope="row">{{request.user.full_name}}</th>
+                  <th scope="row">{{request.user.full_name|title}}</th>
                   <td>{{request.user.created_on|date:"d M Y"}}</td>
                   <td>{{obj1.total_paper}}</td>
                 </tr>
@@ -53,7 +53,7 @@
           <div class="card-body ">
             <table class="table table-responsive-sm table-borderless">
               <thead class="table-dark">
-                <tr class="text-center">
+                <tr class="text-center" >
                   <!-- <th scope="col">#</th> -->
                   <th scope="col">Title</th>
                   <th scope="col">Upload Date</th>
@@ -66,13 +66,21 @@
               </thead>
               <tbody>
                 {% for obj in obj %}
-                <tr >
+                <tr>
                   <!-- <th scope="row">{{obj.id}}</th> -->
-                  <td>{{obj.title}}</td>
-                  <td class="text-center">{{obj.created_on | date:"d M Y"}}</td>
-                  <td class="text-center">{{obj.review_date | date:"d M Y"}}</td>
-                  <td class="text-center">{{obj.status}}</td>
-                  <td class="text-center" id="rating1">{{obj.rating}}/5</td>
+                  <td class="text-dark"><strong>{{obj.title|title}}</strong></td>
+                  <td class="text-center text-muted">{{obj.created_on | date:"d M Y"}}</td>
+                  <td class="text-center text-muted">{{obj.review_date | date:"d M Y"}}</td>
+                  <td class="text-center text-muted">{{obj.status}}</td>
+                  <td class="text-center" id="rating1">
+                      <div><span class="fa fa-star {% if obj.rating >= 1 %} checked {% endif %}"></span>
+                      <span class="fa fa-star {% if obj.rating >= 2 %} checked {% endif %}"></span>
+                      <span class="fa fa-star {% if obj.rating >= 3 %} checked {% endif %}"></span>
+                      <span class="fa fa-star {% if obj.rating >= 4 %} checked {% endif %}"></span>
+                      <span class="fa fa-star {% if obj.rating >= 5 %} checked {% endif %}"></span>
+
+                    </div>
+                  </td>
                   <td>
                     <a href="{{obj.file.url}}" class="btn btn-primary mx-1">
                      <img src="{% static 'image/download1.png' %} " width="20px" height="20px;" >

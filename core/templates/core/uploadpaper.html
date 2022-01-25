@@ -24,35 +24,31 @@
 
                 </div>
                 <div class="mb-3 col-12  col-sm-10 my-2 mx-auto">
-                      <label for="inputType">Description</label>
+                    <label for="inputType">Description</label>
                       <!-- {{ form.description }} -->
-                      <select id="name" class="form-control text-center" name="description" >
-                              <option selected>--Select--</option>
-                              
-                              <option>Computing</option>
-                              <option>Languages and Linguistics</option>
-                              <option>Engineering</option>
-                              <option>Technology</option>
-                              <option>Health Sciences</option>
-                              <option>Education Science</option>
-                              <option>Other</option>
-                              
+                    <select id="name" class="form-control text-center" name="description" >
+                      <option selected>--Select--</option>
+                      <option>Computing</option>
+                      <option>Languages and Linguistics</option>
+                      <option>Engineering</option>
+                      <option>Technology</option>
+                      <option>Health Sciences</option>
+                      <option>Education Science</option>
+                      <option>Other</option>
+                      
                      </select>
                       
                       <div class="invalid-feedback">
-                                       {{ form.description.errors}}
-                                    </div>
+                        {{ form.description.errors}}
+                      </div>
 
                 </div>
-              
-                
                 <div class="mb-3 col-12 col-sm-10 my-5 mx-auto">
-                      <label for="inputFile">File</label>
-                      <input type="file" id="inputFile" name="file" class="form-control {% if form.file.errors %}is-invalid{% endif %}" >
-                      <div class="invalid-feedback">
-                                       {{ form.file.errors}}
-                                    </div>
-
+                  <label for="inputFile">File</label>
+                  <input type="file" id="inputFile" name="file" class="form-control {% if form.file.errors %}is-invalid{% endif %}" >
+                  <div class="invalid-feedback">
+                        {{ form.file.errors}}
+                  </div>
                 </div>
                  
                 <div class="mb-3 col-12  col-sm-10 py-3 mx-auto ">

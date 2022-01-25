@@ -30,7 +30,7 @@
                     {% csrf_token %}
                 <tr>
                   <th scope="row">{{obj.id}}</th>
-                  <td class="text-center">{{obj.title}}</td>
+                  <td class="text-center">{{obj.title|title}}</td>
                   
                   <td><div class="">
                       <input type="text" class="form-control text-center" name="remarks" id="inputType" value="{{ obj.remarks }}">
@@ -50,7 +50,6 @@
                   <td><div class="mx-auto">
                       <select id="name" class="form-control text-center" name="status" >
                       <option selected>{{obj.status}}</option>
-                      <!-- <option>Pending</option> -->
                       <option>Approved</option>
                       <option>Reject</option>
                       <option>Review</option>

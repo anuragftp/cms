@@ -19,13 +19,13 @@
                 <div class="row my-2  ">
                     <label for="inputType" class="col-2 col-sm-6 col-form-label ">Title</label>
                     <div class="col-10 col-sm-6">
-                      <input type="text" readonly class="form-control-plaintext text-center" name="title" id="inputType" value="{{obj.title}}">
+                      <input type="text" readonly class="form-control-plaintext text-center" name="title" id="inputType" value="{{obj.title|capfirst|truncatewords:7}}">
                     </div>
                   </div>
                   <div class=" row my-4">
                     <label for="inputType" class="col-2 col-sm-6  col-form-label">Description</label>
                     <div class="col-10 col-sm-6  mx-auto">
-                      <input type="text" readonly class="form-control-plaintext text-center" name="description" id="inputType" value="{{ obj.description }}">
+                      <input type="text" readonly class="form-control-plaintext text-center" name="description" id="inputType" value="{{ obj.description|title }}">
                     </div>
                   </div>
                   <div class=" row my-4">
@@ -33,7 +33,6 @@
                     <div class="col-5 col-sm-3 mx-auto">
                       <select id="name" class="form-control text-center" name="status" >
                       <option selected>{{obj.status}}</option>
-                      <!-- <option>Pending</option> -->
                       <option>Approved</option>
                       <option>Reject</option>
                       <option>Review</option>
@@ -51,10 +50,10 @@
                     <div class="col-5 col-sm-3 mx-auto">
                       <select id="inputType" class="form-control text-center" name="rating" >
                       <option selected>{{obj.rating}}</option>
-                      <!-- <option>Pending</option> -->
                       <option>1</option>
                       <option>2</option>
-                      <option>3</option><option>4</option>
+                      <option>3</option>
+                      <option>4</option>
                       <option>5</option>
                     </select>
                     </div>
@@ -63,12 +62,9 @@
                   <div class=" row my-4">
                     <label for="inputType" class="col-2 col-sm-6  col-form-label">File</label>
                     <div class="col-5 col-sm-3 mx-auto text-center">
-                      <a href="{{obj.file.url}}" name="file" target="_blank_" class=""><img src="{% static 'image/pdf.jpg' %}" width="50px" height="45px"></a>
+                      <a href="{{obj.file.url}}" name="file" target="_blank_" class=""><img src="{% static 'image/pdf1.png' %}" width="50px" height="52px"></a>
                     </div>
                   </div>
-                  
-                
-                
                
                  {% endfor %}
                 <div class="mb-3 col-6 py-3 mx-auto text-center">

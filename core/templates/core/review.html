@@ -29,9 +29,9 @@
                 	{% csrf_token %}
                 <tr class="text-center">
                   <!-- <th scope="row">{{obj.id}}</th> -->
-                  <td>{{obj.title}}</td>
+                  <td>{{obj.title|title}}</td>
                   <td>{{obj.status}}</td>
-                  <td>{{obj.remarks}}</td>
+                  <td>{{obj.remarks|title}}</td>
                   <td><a href="{{obj.file.url}}" class="btn btn-primary ">
                      <img src="{% static 'image/download1.png' %} " width="20px" height="20px;" >
                     </a></td>
@@ -45,18 +45,7 @@
                 </tbody>
             </table>
             
-          <!--   <div class="row my-2 alert alert-secondary ">
-                    <label for="inputType" class="col-12 col-sm-2 col-form-label">Upload-File :</label>
-                    
-                    <div class="col-12 col-sm-10   d-flex">
-                    	<input type="file" id="inputFile" name="file" class="form-control col-8 {% if form.file.errors %}is-invalid{% endif %}" >
-                    	<input type="text" name="title" value="{{obj.title}}">
-                    	<div class=" ml-3 " >
-                    		<input type="submit" class="btn btn-outline-success mx-auto "  >
-                    	</div>
-                    </div>
-                    
-                  </div> -->
+         
               </form>
             {%if messages %}
             {% for message in messages %}
@@ -65,9 +54,7 @@
         </div>
             {% endfor %}
         {% endif %}
-        <!-- <div class="card-footer">
-              <a class="btn btn-outline-primary" href="{% url 'view_all_view' %}">View All Paper</a>
-            </div> -->
+        
             
           </div>
         </div>
