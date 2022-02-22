@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'django_extensions',
     'crispy_forms',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -155,3 +156,6 @@ GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
 }
+
+# python-magic==0.4.22
+# python-magic-bin==0.4.14

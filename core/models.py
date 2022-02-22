@@ -39,6 +39,9 @@ class Paper(models.Model):
 
 	class Meta:
 		ordering = ['-created_on']
+
+	def __unicode__(self):
+		return self.title
 		
 	def __str__(self):
 		return self.title
