@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect , get_object_or_404
 from django.views.generic import View
 from core.forms import PaperForm,FormStatus,ReviewUpload,ReviewUpdate,ContactForm
-from core.models import Paper,PaperAssign,Reviewer,Contact
+from core.models import Paper,PaperAssign,Reviewer,Contact,Author
 from django.contrib import messages
 from django.db.models import Sum,Count
 from django.contrib.auth import get_user_model
@@ -90,12 +90,18 @@ class UploadPaper(View):
 
 	def post(self,request):
 		form=self.form_class(request.POST,request.FILES)
+		cs = Author()
+		cs.user = User.objects.get(id=request.user.id)
+		opt=Author.objects.filter(id=request.user.id).exists()
+		
 		
 		if form.is_valid():
 			instance=form.save(commit=False)
 			instance.user=request.user
 			# breakpoint()
 			instance.save()
+			if opt!=True:
+				cs.save()
 			return redirect('home_view')
 		# breakpoint()
 		context={'form':form}

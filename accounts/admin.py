@@ -18,7 +18,7 @@ class CustomUserAdmin(ExportActionMixin,UserAdmin):
     add_form = UserForm
     form = CustomUserChangeForm
     model = User
-    search_fields=('email',)
+    search_fields=('email','full_name',)
     add_fieldsets = (
         ('Personal Details', {'fields': ('email', 'full_name', 'picture', 'password1', 'password2')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),

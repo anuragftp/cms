@@ -19,7 +19,7 @@
                   <a href="{{ obj.file.url }}">{{obj.title|title}}</a>
                  </strong> 
               </h6>
-              <div><span class="fa fa-star {% if obj.rating >= 1 %} checked {% endif %}"></span>
+              <div class="text-center"><span class="fa fa-star {% if obj.rating >= 1 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if obj.rating >= 2 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if obj.rating >= 3 %} checked {% endif %}"></span>
                 <span class="fa fa-star {% if obj.rating >= 4 %} checked {% endif %}"></span>
@@ -31,7 +31,7 @@
             <div class="d-flex w-100 justify-content-between">
               <p class="card-text" style="letter-spacing: 2px;"><span class=" fw-bold text-bold  fs-6">{{obj.description}}</span><span class="text-success fw-bold fs-7"> ~{{obj.user.full_name}}</span><span class="text-muted"> (Author)</span>
               </p>
-              <small>{{obj.rating}}/5 | {{day}} days ago  </small>
+              <small>{{day}} days ago  </small>
             </div>
             <hr>
             {% endif %}
