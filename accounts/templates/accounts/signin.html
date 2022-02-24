@@ -1,89 +1,91 @@
-{% extends 'accounts/base.html' %}
 {% load static %}
+<!doctype html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/signin.css' %}">
-
-{% endblock %}
-
-{% block content %}
-
-<div class="container my-5 ">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrapmin.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     
-        <div class=" col-sm-4 my-auto mx-auto">
-            
-                <div class="text-center card px-5  ">
-                    <h2 class=" mt-4 mb-3 mx-auto">Sign In</h2>
-                    <div class="signin">
-                        <div class="signin__form mb-3">
-                            {%if messages %}
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrapmin.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/signin.css' %}">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <title>Conference Management System</title>
+    <style type="text/css">
+        .input_height{
+        height:calc(3.1rem + 0px) !important;
+    }
+    </style>
+  </head>
+  <body>
+ 
+<section class="w-100 px-2 py-2 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6  signin__card_width ">
+        <div class="card " style="border-radius: 1rem;">
+          <div class="card-body p-4 text-center">
+
+            <div class="mb-md-4 mt-md-4 pb-5 mx-3 ">
+
+              <h2 class="fw-bold mb-2 text-uppercase">CMS Login</h2>
+              <p class="text-muted fw-bold mb-5">Please enter your login and password!</p>
+              {%if messages %}
                                 {% for message in messages %}
                             <div class="alert alert-danger" role='alert'>
                                     {{message}}
                             </div>
                                 {% endfor %}
                             {% endif %}
-                            <form method="POST">
+              <form method="POST">
                                 {% csrf_token %}
-                                <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                              <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-telegram"></i></div>
-                            </div>
-
-                                  
-                                    <input id="id_email" type="email" name="email" placeholder="Email" class="form-control ">
-                                                    
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                              <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-key-fill"></i></div>
-                            </div>
-                                   
-                                    <input id="id_password1" type="password" name="password" placeholder="Password" class="form-control">
-                                    
-                                </div>
-                            </div>
+                                <div class="form-floating mb-3 mx-3 my-2">
+                                    <input type="email" class="form-control input_height" id="floatingInput" placeholder="name@example.com" name="email">
+                                    <label for="floatingInput">Email </label>
+                                  </div>
+                                  <div class="form-floating mx-3 my-2">
+                                    <input type="password" class="form-control input_height" id="floatingPassword" placeholder="Password" name="password">
+                                    <label for="floatingPassword">Password</label>
+                                  </div>
                                 
-                                <div class="my-4 mx-auto text-center">
-                                    <button class="btn btn-sm auth__btn">Sign in</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="text-center my-4">
-                            <p class="or__text">OR</p>
-                        </div>
-                        <div class="my-1 mx-auto text-center">
-                            <a class="login__fb__text text-decoration-none" href="/">Log in with Facebook</a>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <a class="forogt__password text-decoration-none" href="{% url 'password_reset' %}">Forgot password?</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center card mt-2 px-5  ">
-                    <p class="have__an__account py-3">Don't have an account? <a href="{% url 'signup_view' %}" class="text-decoration-none">Sign up</a></p>
-                    <!-- <p class="have__an__account py-3">Click Here  <a href="/admin" class="text-decoration-none">Admin Login</a></p> -->
-                </div>
-                
-                <!-- <div class="text-center mt-2 px-2">
-                    <p class="">Get the app.</p>
-                    <div class="row">
-                        <div class="col-4">
-                            <img src="{% static 'img/appstore.png' %}" class="app__download__img">
-                        </div>
-                        <div class="col-4">
-                            <img src="{% static 'img/playstore.png' %}" class="app__download__img">
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-       
-    
-</div>
+                                  <!-- <p class="pb-lg-2 mb-5 mt-4"><span class="text-muted">Conferenece Management System</span></p> -->
+                                <p class="small  pb-lg-4 mt-5 mb-5"><a class="text-muted" href="{% url 'password_reset' %}">Forgot password</a></p>
 
-{% endblock %}
+                                  <button class="btn btn-outline-primary btn-lg px-5" type="submit">Login</button>
+                                
+                            </form>
+
+              
+
+              <!-- <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                <a href="#!" class="text-dark"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#!" class="text-dark"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                <a href="#!" class="text-dark"><i class="fab fa-google fa-lg"></i></a>
+              </div> -->
+
+            </div>
+
+            <div>
+              <p class="mb-0">Don't have an account? <a href="{% url 'signup_view' %}" class="text-muted fw-bold">SignUp</a></p>
+              <!-- <p class="mb-0">CLick Here to go 
+                <a href="{% url 'home' %}" class="text-muted fw-bold">Home</a>
+              </p> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <!-- {% block extra_body %}{% endblock %} -->
+
+  </body>
+</html>

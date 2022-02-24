@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.http import HttpResponse
 
-
+from django.core.mail import send_mail
 from django.http import FileResponse
 from django.views.generic.detail import BaseDetailView
 # from wagtail.documents.views import serve
@@ -20,6 +20,15 @@ from django.views.generic.detail import BaseDetailView
 User = get_user_model()
 # Create your views here.
 
+def sendEmail():
+	send_mail(
+    'Hello',  #subject
+    'This email is generating from the Admin of the conference.', #message
+    None,  #sender ,None If you declare in settings.
+	['toemail.gmail.com'],  #reciver
+    fail_silently=False,
+	)
+	
 
 class Home(View):
 	template_name='core/home/homepage.html'
@@ -279,6 +288,7 @@ class ContactView(View):
 	
 
 	def get(self,request):
+		sendEmail()
 		form=self.form_class()
 		contact_list=Contact.objects.filter(email=request.user.email).all()[:3]
 		context={'form':form,'contact_list':contact_list}

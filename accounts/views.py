@@ -25,7 +25,7 @@ User=get_user_model()
 
 
 class SignInView(View):
-	template_name='accounts/signin1.html'
+	template_name='accounts/signin.html'
 
 	def get(self,request,*args,**kwargs):
 		if request.user.is_authenticated:
@@ -59,7 +59,7 @@ class SignInView(View):
 
 
 class SignUpView(View):
-	template_name='accounts/signup1.html'
+	template_name='accounts/signup.html'
 
 	form_class=UserForm
 	# form_class1=DetailsForm
