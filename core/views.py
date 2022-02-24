@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import F,Q
 from datetime import datetime
 import os
+from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.http import HttpResponse
 
@@ -92,17 +93,31 @@ class UploadPaper(View):
 		form=self.form_class(request.POST,request.FILES)
 		cs = Author()
 		cs.user = User.objects.get(id=request.user.id)
-		opt=Author.objects.filter(id=request.user.id).exists()
+		opt=Author.objects.filter(user=request.user.id).exists()
+		# for file in request.FILES.items():
+		# 	name = request.FILES['file'].name
+		# 	breakpoint()
+		# if file  in request.FILES.items():
+		# 	filename = request.FILES['filename'].name
+		# 	breakpoint
+		filename = request.FILES['file'].name
+		filee="author_files/" + filename
+		fileobj=Paper.objects.filter(file=filee).exists()
 		
-		
-		if form.is_valid():
-			instance=form.save(commit=False)
-			instance.user=request.user
-			# breakpoint()
-			instance.save()
-			if opt!=True:
-				cs.save()
-			return redirect('home_view')
+		# breakpoint()
+
+		if fileobj:
+			messages.error(request,"file is already uploaded",extra_tags="error")
+			return render(request,self.template_name)
+		else:
+			if form.is_valid():
+				instance=form.save(commit=False)
+				instance.user=request.user
+				# breakpoint()
+				instance.save()
+				if opt!=True:
+					cs.save()
+				return redirect('home_view')
 		# breakpoint()
 		context={'form':form}
 

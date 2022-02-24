@@ -86,7 +86,7 @@
                      <img src="{% static 'image/download1.png' %} " width="20px" height="20px;" >
                     </a>
                      {% if obj.status == "Submitted" %}
-                      <a href="{% url 'delete_paper_view' obj.id %}" class="btn btn-danger">    
+                      <a href="{% url 'delete_paper_view' obj.id %}" class="btn btn-danger  confirmation">    
                             <img src="{% static 'image/delete.png' %} " width="20px" height="20px;" >
                           </a>
                           {% endif %}
@@ -116,6 +116,7 @@
   console.log(a);
 
 </script> -->
+
 
 {% endblock %}
 
